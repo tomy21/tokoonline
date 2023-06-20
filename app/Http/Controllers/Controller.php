@@ -47,13 +47,7 @@ class Controller extends BaseController
             'title'     => 'Admin Dashboard',
         ]);
     }
-    public function product()
-    {
-        return view('admin.page.product',[
-            'name'      => "Product",
-            'title'     => 'Admin Product',
-        ]);
-    }
+    
     public function userManagement()
     {
         return view('admin.page.user',[
