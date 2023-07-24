@@ -76,18 +76,7 @@ class ProductController extends Controller
             ]
         )->render();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(UpdateproductRequest $request )
-    // {
-
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(UpdateproductRequest $request, product $product, $id)
     {
         $data = product::findOrFail($id);

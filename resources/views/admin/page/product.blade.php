@@ -18,7 +18,7 @@
                     <span>Tambah Product</span>
                 </i>
             </button>
-            <input type="text" class="form-control w-25" placeholder="Search....">
+            <input type="text" wire:model="search" class="form-control w-25" placeholder="Search....">
         </div>
         <div class="card-body">
             <table class="table table-responsive table-striped">
@@ -61,7 +61,14 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $data->links() }}
+            <div class="pagination d-flex flex-row justify-content-between">
+                <div class="showData">
+                    Data ditampilkan {{$data->count()}} dari {{$data->total()}}
+                </div>
+                <div>
+                    {{ $data->links() }}
+                </div>
+            </div>
         </div>
     </div>
     <div class="tampilData" style="display: none;"></div>

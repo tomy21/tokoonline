@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="navbar-item">
-                <a href="#" class="">
+                <a href="logout" class="">
                     <div class="d-flex gap-3">
                         <span class="material-icons">logout</span>
                         <p class="m-0 p-0">Logout</p>

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Controller extends BaseController
 {
@@ -61,5 +66,46 @@ class Controller extends BaseController
             'name'      => "Report",
             'title'     => 'Admin Report',
         ]);
+    }
+    public function login()
+    {
+        return view('admin.page.login',[
+            'name'      => "Login",
+            'title'     => 'Admin Login',
+        ]);
+    }
+    public function loginProses(Request $request)
+    {
+        Session::flash('error', $request->email);
+        $dataLogin = [
+            'email' => $request->email,
+            'password'  => $request->password,
+        ];
+
+        $user = new User;
+        $proses = $user::where('email',$request->email)->first();
+
+        if($proses->is_admin === 0){
+            Session::flash('error','Kamu bukan admin');
+            return back();
+        }else{
+            if(Auth::attempt($dataLogin)){
+                Alert::toast('Kamu berhasil login', 'success');
+                $request->session()->regenerate();
+                return redirect()->intended('/admin/dashboard');
+            }else{
+                Alert::toast('Email dan Password salah', 'error');
+                return back();
+            }
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        Alert::toast('Kamu berhasil Logout', 'success');
+        return redirect('admin');
     }
 }
