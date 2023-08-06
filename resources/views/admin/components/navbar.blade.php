@@ -12,6 +12,12 @@
                 notifications
             </span>
         </div>
-        <img src="{{ asset('assets/images/default.png') }}" class="rounded-circle" style="width: 50px;" alt="">
+        <div class="d-flex gap-2 align-items-center">
+            <img src="{{ asset('storage/user/'. Auth::user()->foto) }}" class="rounded-circle" style="width: 50px;" alt="">
+            <div class="d-flex flex-column">
+                <p class="m-0" style="font-weight: 700; font-size:14px;">{{Auth::user()->name}}</p>
+                <p class="m-0" style="font-size:12px">{{Auth::user()->email}}</p>
+            </div>
+        </div>
     </div>
 </nav>

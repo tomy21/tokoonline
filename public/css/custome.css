@@ -10,24 +10,33 @@ main{
     min-height: 100vh;
     overflow: hidden;
 }
-.icon-nav {
+/* .icon-nav {
     position: relative;
     color: #FFFFFF8C;
 }
 .icon-nav:hover {
     color: white;
-}
+} */
 .circle {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    top: -1px;
+    right: -5px;
     border-radius: 50%;
     background-color: rgba(249, 32, 32, 0.86);
     color: white;
-    text-align: center;
     font-size: 12px;
-    top: 10px;
-    right: 130px;
+    padding: 2px 9px;
+}
+.notif{
+    position: relative;
+    display: inline-block;
+}
+.fa-bag-shopping{
+    font-size: 24px;
+    color: rgba(249, 249, 249, 0.686);
+}
+.fa-bag-shopping:hover{
+    color: rgba(255, 255, 255, 0.867);
 }
 
 section{

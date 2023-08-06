@@ -18,8 +18,12 @@ class product extends Model
         'harga',
         'discount',
         'quantity',
+        'quantity_out',
         'foto',
         'is_active',
     ];
-    protected $hidden;
+    // public function product()
+    // {
+    //     return $this->hasOne(tblCart::class, 'id_barang', 'id');
+    // }
 }

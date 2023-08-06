@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\modelDetailTransaksi;
+use App\Models\product;
+use App\Models\tblCart;
+use App\Models\transaksi;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,36 +19,124 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function index()
-    {
-        return view('pelanggan.page.home',[
-            'title'     => 'Home',
-        ]);
-    }
+    
     public function shop()
     {
+        $data = product::paginate(8);
+        $countKeranjang = tblCart::where(['idUser' => 'guest123', 'status' => 0])->count();
+
         return view('pelanggan.page.shop',[
             'title'     => 'Shop',
+            'data'      => $data,
+            'count'     => $countKeranjang,
         ]);
     }
     public function transaksi()
     {
+        $db = tblCart::with('product')->where(['idUser'=> 'guest123' , 'status' => 0])->get();
+        $countKeranjang = tblCart::where(['idUser' => 'guest123', 'status' => 0])->count();
+
+        // dd($db->product->nama_product);die;
         return view('pelanggan.page.transaksi',[
             'title'     => 'Transaksi',
+            'count'     => $countKeranjang,
+            'data'      => $db
         ]);
     }
     public function contact()
     {
+        $countKeranjang = tblCart::where(['idUser' => 'guest123', 'status' => 0])->count();
+
         return view('pelanggan.page.contact',[
             'title'     => 'Contact Us',
+            'count'     => $countKeranjang,
         ]);
     }
     public function checkout()
     {
+        $countKeranjang = tblCart::where(['idUser' => 'guest123', 'status' => 0])->count();
+        $code = transaksi::count();
+        $codeTransaksi = date('Ymd') . $code + 1;
+        $detailBelanja = modelDetailTransaksi::where(['id_transaksi'=> $codeTransaksi, 'status' => 0])
+        ->sum('price');
+        $jumlahBarang = modelDetailTransaksi::where(['id_transaksi'=> $codeTransaksi, 'status' => 0])
+        ->count('id_barang');
+        $qtyBarang = modelDetailTransaksi::where(['id_transaksi'=> $codeTransaksi, 'status' => 0])
+        ->sum('qty');
         return view('pelanggan.page.checkOut',[
             'title'     => 'Check Out',
+            'count'     => $countKeranjang,
+            'detailBelanja' => $detailBelanja,
+            'jumlahbarang' => $jumlahBarang,
+            'qtyOrder'  => $qtyBarang,
+            'codeTransaksi' => $codeTransaksi
         ]);
     }
+    public function prosesCheckout(Request $request ,$id)
+    {
+        $data = $request->all();
+        // $findId = tblCart::where('id',$id)->get();
+        $code = transaksi::count();
+        $codeTransaksi = date('Ymd') . $code + 1;
+        // dd($data);die;
+
+        // simpan detail barang
+        $detailTransaksi = new modelDetailTransaksi();
+        $fieldDetail = [
+            'id_transaksi' => $codeTransaksi,
+            'id_barang'    => $data['idBarang'],
+            'qty'          => $data['qty'],
+            'price'        => $data['total']
+        ];
+        $detailTransaksi::create($fieldDetail);
+
+        // update cart 
+        $fieldCart = [
+            'qty'          => $data['qty'],
+            'price'        => $data['total'],
+            'status'       => 1,
+        ];
+        tblCart::where('id',$id)->update($fieldCart);
+
+        Alert::toast('Checkout Berhasil', 'success');
+        return redirect()->route('checkout');
+
+    }
+
+    public function prosesPembayaran(Request $request)
+    {
+        $data = $request->all();
+        $dbTransaksi = new transaksi();
+        // dd($data);die;
+        
+        $dbTransaksi->code_transaksi    = $data['code'];
+        $dbTransaksi->total_qty         = $data['totalQty'];
+        $dbTransaksi->total_harga       = $data['dibayarkan'];
+        $dbTransaksi->nama_customer     = $data['namaPenerima'];
+        $dbTransaksi->alamat            = $data['alamatPenerima'];
+        $dbTransaksi->no_tlp            = $data['tlp'];
+        $dbTransaksi->ekspedisi         = $data['ekspedisi'];
+        
+        $dbTransaksi->save();
+
+        $dataCart = modelDetailTransaksi::where('id_transaksi', $data['code'])->get();
+        foreach ($dataCart as $x) {
+            $dataUp = modelDetailTransaksi::where('id',$x->id)->first();
+            $dataUp->status    = 1;
+            $dataUp->save();
+
+            $idProduct = product::where('id', $x->id_barang)->first();
+            $idProduct->quantity = $idProduct->quantity - $x->qty;
+            $idProduct->quantity_out = $x->qty;
+            $idProduct->save();
+            
+        }
+
+        Alert::alert()->success('Transaksi berhasil', 'Ditunggu barangnya');
+        return redirect()->route('home');
+
+    }
+
     public function admin()
     {
         return view('admin.page.dashboard',[
