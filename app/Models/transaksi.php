@@ -18,6 +18,7 @@ class transaksi extends Model
         'alamat',
         'no_tlp',
         'ekspedisi',
+        'status',
     ];
     protected $hidden;
 }

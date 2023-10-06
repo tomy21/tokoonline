@@ -18,14 +18,33 @@
                     <a class="nav-link {{ Request::path() == 'contact' ? 'active' : '' }}" href="/contact">Contact
                         Us</a>
                 </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Login | Register</button>
-                </li>
+                @auth
+                    <div class="select" tabindex="0" role="button">
+                        <div class="text-links">
+                            <div class="d-flex gap-2 align-items-center">
+                                <img src="{{ asset('storage/user/' . Auth::user()->foto) }}" class="rounded-circle"
+                                    style="width: 50px;" alt="">
+                                <div class="d-flex flex-column text-white">
+                                    <p class="m-0" style="font-weight: 700; font-size:14px;">{{ Auth::user()->name }}
+                                    </p>
+                                    <p class="m-0" style="font-size:12px">{{ Auth::user()->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="links-login text-white" id="links-login">
+                            <a href="logout_pelanggan" style="text-decoration: none" role="button" tabindex="0">Keluar</a>
+                        </div>
+                    </div>
+                @else
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Login | Register</button>
+                    </li>
+                @endauth
                 <li class="nav-item">
                     <div class="notif">
-                        <a href="/transaksi" class="fs-5 nav-link">
+                        <a href="/transaksi" class="fs-5 nav-link {{ Request::path() == 'transaksi' ? 'active' : '' }}">
                             <i class="fa fa-bag-shopping"></i>
                         </a>
                         @if ($count)
@@ -33,7 +52,26 @@
                         @endif
                     </div>
                 </li>
+                <li class="nav-item">
+                    <div class="notif">
+                        <a href="/checkOut" class="fs-5 nav-link {{ Request::path() == 'checkOut' ? 'active' : '' }}">
+                            <i class="fa fa-cash-register"></i>
+                        </a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    $(".text-links").click(function(e) {
+        e.preventDefault();
+        var $linksLogin = $("#links-login");
+        if ($linksLogin.hasClass("activeLogin")) {
+            $linksLogin.removeClass("activeLogin");
+        } else {
+            $linksLogin.addClass("activeLogin");
+        }
+    });
+</script>

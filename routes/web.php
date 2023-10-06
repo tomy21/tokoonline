@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TransaksiController::class, 'index'])->name('home');
 Route::POST('/addTocart', [TransaksiController::class, 'addTocart'])->name('addTocart');
-
+Route::POST('/storePelanggan', [UserController::class, 'storePelanggan'])->name('storePelanggan');
+Route::POST('/login_pelanggan', [UserController::class, 'loginProses'])->name('loginproses.pelanggan');
+Route::GET('/logout_pelanggan', [UserController::class, 'logout'])->name('logout.pelanggan');
 
 Route::get('/shop', [Controller::class, 'shop'])->name('shop');
 Route::get('/transaksi', [Controller::class, 'transaksi'])->name('transaksi');
@@ -28,10 +30,13 @@ Route::get('/contact', [Controller::class, 'contact'])->name('contact');
 Route::get('/checkout', [Controller::class, 'checkout'])->name('checkout');
 Route::POST('/checkout/proses/{id}', [Controller::class, 'prosesCheckout'])->name('checkout.product');
 Route::POST('/checkout/prosesPembayaran', [Controller::class, 'prosesPembayaran'])->name('checkout.bayar');
+Route::get('/checkOut', [Controller::class, 'keranjang'])->name('keranjang');
+Route::get('/checkOut/{id}', [Controller::class, 'bayar'])->name('keranjang.bayar');
 
 
 Route::get('/admin', [Controller::class, 'login'])->name('login');
 Route::POST('/admin/loginProses', [Controller::class, 'loginProses'])->name('loginProses');
+
 
 Route::group(['middleware' => 'admin'],function(){
     Route::get('/admin/dashboard', [Controller::class, 'admin'])->name('admin');

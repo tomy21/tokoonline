@@ -17,6 +17,38 @@ main{
 .icon-nav:hover {
     color: white;
 } */
+
+.text-links {
+    cursor: pointer;
+}
+
+.links-login {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #006786e0;
+    padding: 10px;
+    width: 200px;
+    z-index: 9999;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+.activeLogin {
+    visibility: visible;
+    opacity: 1;
+}
+
+.links-login>a:hover {
+    color: #fa9191;
+}
+
+.links-login>a {
+    color: #fff;
+}
+
+
 .circle {
     position: absolute;
     top: -1px;
