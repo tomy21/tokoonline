@@ -1,8 +1,8 @@
 @extends('pelanggan.layout.index')
 
 @section('content')
-    <div class="row mt-4">
-        <div class="col-md-3">
+    <div class="d-flex flex-row gap-2 mt-4">
+        <div class="" style="width: 30%;">
             <div class="card" style="width: 18rem;">
                 <div class="card-header">
                     Kategory
@@ -21,15 +21,18 @@
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <div class="d-flex flex-column gap-4">
-                                        <a href="#" class="page-link">
-                                            <i class="fas fa-plus"></i> Baju Pria
-                                        </a>
-                                        <a href="#" class="page-link">
-                                            <i class="fas fa-plus"></i> Celana Pria
-                                        </a>
-                                        <a href="#" class="page-link">
-                                            <i class="fas fa-plus"></i> Aksesoris Pria
-                                        </a>
+                                        <div class="d-flex flex-row gap-3">
+                                            <input type="checkbox" name="kategory" class="kategory" value="celana Pria">
+                                            <span>Celana Pria</span>
+                                        </div>
+                                        <div class="d-flex flex-row gap-3">
+                                            <input type="checkbox" name="kategory" class="kategory" value="baju Pria">
+                                            <span>Baju Pria</span>
+                                        </div>
+                                        <div class="d-flex flex-row gap-3">
+                                            <input type="checkbox" name="kategory" class="kategory" value="aksesoris Pria">
+                                            <span>Aksesoris Pria</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -47,15 +50,20 @@
                                 <div class="accordion-body p-0">
                                     <div class="accordion-body">
                                         <div class="d-flex flex-column gap-4">
-                                            <a href="#" class="page-link">
-                                                <i class="fas fa-plus"></i> Baju Wanita
-                                            </a>
-                                            <a href="#" class="page-link">
-                                                <i class="fas fa-plus"></i> Celana Wanita
-                                            </a>
-                                            <a href="#" class="page-link">
-                                                <i class="fas fa-plus"></i> Aksesoris Wanita
-                                            </a>
+                                            <div class="d-flex flex-row gap-3">
+                                                <input type="checkbox" name="kategory" class="kategory"
+                                                    value="celana Wanita">
+                                                <span>Celana Wanita</span>
+                                            </div>
+                                            <div class="d-flex flex-row gap-3">
+                                                <input type="checkbox" name="kategory" class="kategory" value="baju Wanita">
+                                                <span>Baju Wanita</span>
+                                            </div>
+                                            <div class="d-flex flex-row gap-3">
+                                                <input type="checkbox" name="kategory" class="kategory"
+                                                    value="aksesoris Wanita">
+                                                <span>Aksesoris Wanita</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -74,15 +82,21 @@
                                 <div class="accordion-body">
                                     <div class="accordion-body p-0">
                                         <div class="d-flex flex-column gap-4">
-                                            <a href="#" class="page-link">
-                                                <i class="fas fa-plus"></i> Baju Anak-anak
-                                            </a>
-                                            <a href="#" class="page-link">
-                                                <i class="fas fa-plus"></i> Celana Anak-anak
-                                            </a>
-                                            <a href="#" class="page-link">
-                                                <i class="fas fa-plus"></i> Aksesoris Anak-anak
-                                            </a>
+                                            <div class="d-flex flex-row gap-3">
+                                                <input type="checkbox" name="kategory" class="kategory"
+                                                    value="celana anak-anak">
+                                                <span>Celana Anak-anak</span>
+                                            </div>
+                                            <div class="d-flex flex-row gap-3">
+                                                <input type="checkbox" name="kategory" class="kategory"
+                                                    value="baju anak-anak">
+                                                <span>Baju Anak-anak</span>
+                                            </div>
+                                            <div class="d-flex flex-row gap-3">
+                                                <input type="checkbox" name="kategory" class="kategory"
+                                                    value="aksesoris anak-anak">
+                                                <span>Aksesoris Anak-anak</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -92,22 +106,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9 d-flex flex-wrap gap-4 mb-5">
+        <div class="d-flex flex-wrap gap-4 mb-5" id="filterResult">
             @if ($data->isEmpty())
                 <h1>Belum ada product ...!</h1>
             @else
                 @foreach ($data as $p)
-                    <div class="card" style="width:220px;">
-                        <div class="card-header m-auto" style="height:100%;width:100%;">
+                    <div class="card" style="width:200px;">
+                        <div class="card-header m-auto">
                             <img src="{{ asset('storage/product/' . $p->foto) }}" alt="baju 1"
-                                style="width: 100%;height:200px; object-fit: cover; padding:0;">
+                                style="width: 100%;height:130px; object-fit: cover; padding:0;">
                         </div>
                         <div class="card-body">
-                            <p class="m-0 text-justify"> {{ $p->nama_product }} </p>
+                            <p class="m-0 text-justify" style="font-size: 14px;"> {{ $p->nama_product }} </p>
                             <p class="m-0"><i class="fa-regular fa-star"></i> 5+</p>
                         </div>
                         <div class="card-footer d-flex flex-row justify-content-between align-items-center">
-                            <p class="m-0" style="font-size: 16px; font-weight:600;"><span>IDR
+                            <p class="m-0" style="font-size: 14px; font-weight:600;"><span>IDR
                                 </span>{{ number_format($p->harga) }}</p>
                             <button class="btn btn-outline-primary" style="font-size:24px">
                                 <i class="fa-solid fa-cart-plus"></i>
@@ -116,14 +130,38 @@
                     </div>
                 @endforeach
         </div>
-        <div class="pagination d-flex flex-row justify-content-between">
-            <div class="showData">
-                Data ditampilkan {{ $data->count() }} dari {{ $data->total() }}
-            </div>
-            <div>
-                {{ $data->links() }}
-            </div>
-        </div>
-        @endif
     </div>
+    <div class="pagination d-flex flex-row justify-content-between">
+        <div class="showData">
+            Data ditampilkan {{ $data->count() }} dari {{ $data->total() }}
+        </div>
+        <div>
+            {{ $data->links() }}
+        </div>
+    </div>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            $('.kategory').change(function(e) {
+                e.preventDefault();
+                var value = $(this).val();
+                var split = value.split(' ');
+                var kategory = split[0];
+                var type = split[1];
+                // alert(type);
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('shop') }}",
+                    data: {
+                        kategory: kategory,
+                        type: type,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

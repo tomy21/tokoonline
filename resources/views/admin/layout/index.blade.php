@@ -19,15 +19,19 @@
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     @stack('style')
     <title>Toko Online | {{ $title }}</title>
 </head>
 
 <body>
-    @include('admin.components.sidebar')
-    <main>
-        <div style="margin-left: 280px; width:82%; margin-top:10px;">
+    <main class="d-flex flex-row px-2">
+        @include('admin.components.sidebar')
+        <div style="margin-left: 280px; width:100%; margin-top:10px;">
             @include('admin.components.navbar')
             <div class="mt-2">
                 <section>
@@ -50,4 +54,5 @@
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 @stack('scripts')
+
 </html>

@@ -1,11 +1,11 @@
-*{
-    font-family: 'Poppins', sans-serif;
+* {
+    font-family: "Poppins", sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     /* background-color: rgb(197, 197, 197); */
 }
-main{
+main {
     background-color: rgba(224, 224, 224, 0.744);
     min-height: 100vh;
     overflow: hidden;
@@ -40,14 +40,13 @@ main{
     opacity: 1;
 }
 
-.links-login>a:hover {
+.links-login > a:hover {
     color: #fa9191;
 }
 
-.links-login>a {
+.links-login > a {
     color: #fff;
 }
-
 
 .circle {
     position: absolute;
@@ -59,38 +58,37 @@ main{
     font-size: 12px;
     padding: 2px 9px;
 }
-.notif{
+.notif {
     position: relative;
     display: inline-block;
 }
-.fa-bag-shopping{
+.fa-bag-shopping {
     font-size: 24px;
     color: rgba(249, 249, 249, 0.686);
 }
-.fa-bag-shopping:hover{
+.fa-bag-shopping:hover {
     color: rgba(255, 255, 255, 0.867);
 }
 
-section{
+section {
     min-height: 80vh;
 }
 
 /* style footer */
-footer{
+footer {
     position: static;
     bottom: 0;
     background-color: #025464;
     color: white;
 }
 
-
 /* sidebar */
-.sidebar{
+.sidebar {
     position: fixed;
     width: 250px;
     height: 97vh;
 }
-.sidebar a{
+.sidebar a {
     text-decoration: none;
     color: white;
 }
@@ -103,7 +101,7 @@ footer{
     border-radius: 10px;
     margin: 0;
 }
-.sidebar h5{
+.sidebar h5 {
     font-size: 24px;
     font-weight: 800;
     color: white;

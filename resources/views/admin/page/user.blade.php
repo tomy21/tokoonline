@@ -1,16 +1,6 @@
 @extends('admin.layout.index')
 
 @section('content')
-    <div class="card mb-1">
-        <div class="card-body d-flex flex-row justify-content-between">
-            <div class="filter d-flex flex-lg-row gap-3">
-                <input type="date" class="form-control" name="tgl_awal">
-                <input type="date" class="form-control" name="tgl_akhir">
-                <button class="btn btn-primary">Filter</button>
-            </div>
-
-        </div>
-    </div>
     <div class="card rounded-full">
         <div class="card-header bg-transparent d-flex justify-content-between">
             <button class="btn btn-info" id="addData">
@@ -45,10 +35,12 @@
                             <td>{{ $x->created_at }}</td>
                             <td>{{ $x->name }}</td>
                             <td>
-                                <span class='badge text-bg-{{ $x->role === 1 ? 'info' : 'success' }}'>{{ $x->role === 1 ? 'Admin' : 'Manager' }}</span>
+                                <span
+                                    class='badge text-bg-{{ $x->role === 1 ? 'info' : 'success' }}'>{{ $x->role === 1 ? 'Admin' : 'Manager' }}</span>
                             </td>
                             <td>
-                                <span class="badge text-bg-{{ $x->is_active === 1 ? 'success' : 'danger'}}">{{ $x->is_active === 1 ? 'Active' : 'No Active'}}</span>
+                                <span
+                                    class="badge text-bg-{{ $x->is_active === 1 ? 'success' : 'danger' }}">{{ $x->is_active === 1 ? 'Active' : 'No Active' }}</span>
                             </td>
                             <td>
                                 <button class="btn btn-info editModal" data-id="{{ $x->id }}">
@@ -64,7 +56,7 @@
             </table>
             <div class="pagination d-flex flex-row justify-content-between">
                 <div class="showData">
-                    Data ditampilkan {{$data->count()}} dari {{$data->total()}}
+                    Data ditampilkan {{ $data->count() }} dari {{ $data->total() }}
                 </div>
                 <div>
                     {{ $data->links() }}

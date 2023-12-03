@@ -38,7 +38,7 @@ class UserController extends Controller
         $data->alamat       = $request->alamat;
         $data->tlp          = $request->tlp;
         $data->role         = $request->role;
-        $data->tglLahir         = $request->tglLahir;
+        $data->tglLahir     = $request->tglLahir;
         $data->is_active    = 1;
         $data->is_mamber    = 0;
         $data->is_admin     = 1;
@@ -147,7 +147,7 @@ class UserController extends Controller
 
         $user = new User;
         $proses = $user::where('email', $request->email)->first();
-        
+
         if ($proses->is_active === 0) {
             Alert::toast('Kamu belum register', 'error');
             return back();

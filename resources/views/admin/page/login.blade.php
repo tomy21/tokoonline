@@ -28,7 +28,7 @@
 
 <body>
 
-    <main>
+    <main class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="card p-4 m-auto" style="width: 30vw;">
             <div class="card-header bg-transparent text-center">
                 <h5>{{ $name }}</h5>
@@ -37,7 +37,7 @@
                 @csrf
                 @if (session('error'))
                     <div class="alert alert-danger">
-                        <b>Oppss...!</b> {{session('error')}}
+                        <b>Oppss...!</b> {{ session('error') }}
                     </div>
                 @endif
                 <div class="card-body">

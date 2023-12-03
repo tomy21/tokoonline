@@ -32,7 +32,8 @@
                             </div>
                         </div>
                         <div class="links-login text-white" id="links-login">
-                            <a href="logout_pelanggan" style="text-decoration: none" role="button" tabindex="0">Keluar</a>
+                            <a href="logout_pelanggan" style="text-decoration: none" role="button"
+                                tabindex="0">Keluar</a>
                         </div>
                     </div>
                 @else

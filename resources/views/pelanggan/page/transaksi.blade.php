@@ -14,12 +14,12 @@
         @foreach ($data as $x)
             <div class="card mb-3">
                 <div class="card-body d-flex gap-4">
-                    <img src="{{ asset('storage/product/' . $x->product->foto) }}" alt="">
+                    <img src="{{ asset('storage/product/' . $x->product->foto) }}" width="300" alt="">
                     <form action="{{ route('checkout.product', ['id' => $x->id]) }}" method="POST">
                         @csrf
                         <div class="desc w-100">
                             <p style="font-size:24px; font-weight:700;">{{ $x->product->nama_product }}</p>
-                            <input type="hidden" name="idBarang" value="{{$x->product->id}}">
+                            <input type="hidden" name="idBarang" value="{{ $x->product->id }}">
                             <input type="number" class="form-control border-0 fs-1" name="harga" id="harga"
                                 value="{{ $x->product->harga }}">
                             <div class="row mb-2">
@@ -35,8 +35,8 @@
                             </div>
                             <div class="row">
                                 <label for="price" class="col-sm-2 col-form-label fs-5">Total</label>
-                                <input type="text" class="col-sm-2 form-control w-25 border-0 fs-4 total" name="total" readonly
-                                    id="total">
+                                <input type="text" class="col-sm-2 form-control w-25 border-0 fs-4 total" name="total"
+                                    readonly id="total">
                             </div>
                             <div class="row w-50 gap-1">
                                 <button type="submit" class="btn btn-success col-sm-5">
